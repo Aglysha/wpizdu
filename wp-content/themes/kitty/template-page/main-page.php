@@ -10,7 +10,28 @@ get_header();
 
     <section class="section" style="background-image: url('<?=get_template_directory_uri(). "/img/primary.png";?>)">
         <div class="container">
-            <ul class="nav nav-fill" style="font-size: 14px;">
+
+	        <?php wp_nav_menu(
+		        [
+			        'theme_location'  => '',
+			        'menu'            => '',
+			        'container'       => 'div',
+			        'container_class' => '',
+			        'container_id'    => '',
+			        'menu_class'      => 'menu',
+			        'menu_id'         => '',
+			        'echo'            => true,
+			        'fallback_cb'     => 'wp_page_menu',
+			        'before'          => '',
+			        'after'           => '',
+			        'link_before'     => '',
+			        'link_after'      => '',
+			        'items_wrap'      => '<ul class="nav nav-fill" style="font-size: 14px;"></ul>',
+			        'depth'           => 0,
+			        'walker'          => '',
+		        ]
+	        ); ?>
+            <!--<ul class="nav nav-fill" style="font-size: 14px;">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
@@ -87,7 +108,7 @@ get_header();
                         <a class="dropdown-item" href="#">С пробегом</a>
                     </div>
                 </li>
-            </ul>
+            </ul>-->
             <div style="margin: 100px 0 350px;">
                 <p class="big_text mb-5" style="line-height: 48px;">Крупнейшая лизинговая <br> компания в России</p>
                 <p class="small_text mb-5">

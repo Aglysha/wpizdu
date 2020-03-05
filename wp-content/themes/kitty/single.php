@@ -17,82 +17,30 @@ get_header();
             <section class="section" style="background-image: url('<?=get_template_directory_uri().'/img/bg-3.png';?>');">
                 <div class="container" style="color: white">
                     <ul class="nav nav-fill" style="font-size: 14px;">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Автолизинг
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Грузовой</a>
-                                <a class="dropdown-item" href="#">Легковой</a>
-                                <a class="dropdown-item" href="#">Легкий коммерческий</a>
-                                <a class="dropdown-item" href="#">Спецтехника</a>
-                                <a class="dropdown-item" href="#">Экспресс лизинг</a>
-                                <a class="dropdown-item" href="#">Универсальный лизинг</a>
-                                <a class="dropdown-item" href="#">Операционный лизинг</a>
-                                <a class="dropdown-item" href="#">Спец предложения</a>
-                                <a class="dropdown-item" href="#">Такси</a>
-                                <a class="dropdown-item" href="#">С пробегом</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Спецтехника
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Для строительства</a>
-                                <a class="dropdown-item" href="#">Для ЖКХ</a>
-                                <a class="dropdown-item" href="#">Для АЛК</a>
-                                <a class="dropdown-item" href="#">Грузовики</a>
-                                <a class="dropdown-item" href="#">Прицепы</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Транспорт
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">ЖД Транспорт</a>
-                                <a class="dropdown-item" href="#">Воздушные суда</a>
-                                <a class="dropdown-item" href="#">Морской и речной транспорт</a>
-                                <a class="dropdown-item" href="#">Грузовой транспорт</a>
-                                <a class="dropdown-item" href="#">Автобусы</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Отраслевое оборудование
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Энергетическое оборудование</a>
-                                <a class="dropdown-item" href="#">Добыча и переработка</a>
-                                <a class="dropdown-item" href="#">Другое</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Недвижимость
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Возвратный лизинг</a>
-                                <a class="dropdown-item" href="#">Финансовый лизинг</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Программы и предложения
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Все акции</a>
-                                <a class="dropdown-item" href="#">От партнеров</a>
-                                <a class="dropdown-item" href="#">С пробегом</a>
-                            </div>
-                        </li>
+		                <? $cats = get_categories( [
+			                'taxonomy'     => 'category',
+			                'type'         => 'post',
+		                ] );
+		                foreach ( $cats as $cat ):?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="/<?=$cat->slag?>" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+					                <?= $cat->name?>
+                                </a>
+				                <? $posts = get_posts(
+					                [
+						                'category' => $cat->cat_ID
+					                ]
+				                ); ?>
+				                <? if ($posts):?>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						                <?foreach ( $posts as $post ) {?>
+                                            <a class="dropdown-item" href="/<?=$post->post_name;?>"><?=$post->post_title;?></a>
+						                <?}?>
+                                    </div>
+				                <?endif;?>
+                            </li>
+		                <?endforeach; ?>
                     </ul>
                     <div style="margin: 100px 0 350px;">
                         <p class="big_text mb-5" style="line-height: 48px;">Спецтехника <br>и самоходные машины</p>
